@@ -4,15 +4,15 @@
     <div class="input">
         <h2>Input</h2>
         <form class="pure-form" action="{{ url_for('test') }}" method="get">
-        <textarea class="pure-input-3-4" style="height: 150px" readonly>ssh-keygen -t rsa -b 4096 -f temp.rsa -N ''</textarea>
+            <textarea class="pure-input-3-4" style="height: 150px" readonly>ssh-keygen -t rsa -b 4096 -f temp.rsa -N ''</textarea>
             <button type="submit" class="pure-button pure-button-primary" style="margin-top: 110px">confirm</button>
         </form> 
     </div>
     <div class="output">
         <h2>Output</h2>
         <form class="pure-form">
-        <textarea class="pure-input-3-4" placeholder="private_key" style="height: 150px" readonly>{{private_key}}</textarea>
-        <textarea class="pure-input-3-4" placeholder="public_key" style="height: 150px; margin-top: 10px" readonly>{{public_key}}</textarea>
+            <textarea class="pure-input-3-4" placeholder="private_key" style="height: 150px" readonly>{{private_key}}</textarea>
+            <textarea class="pure-input-3-4" placeholder="public_key" style="height: 150px; margin-top: 10px" readonly>{{public_key}}</textarea>
         </form> 
     </div>
 </div>
