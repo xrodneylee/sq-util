@@ -18,7 +18,7 @@ def gunpg():
 
 @app.route('/test', methods=['GET'])
 def test():
-	os.system("ssh-keygen -t rsa -b 4096 -f temp.rsa -N ''")
+	os.system("ssh-keygen -t rsa -b 4096 -f id_rsa.pub -N ''")
 	return render_template('ssh.html', private_key='qq', public_key='qq')
 
 if __name__ == '__main__':

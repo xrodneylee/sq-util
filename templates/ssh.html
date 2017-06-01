@@ -4,8 +4,8 @@
     <div class="input">
         <h2>Input</h2>
         <form class="pure-form" action="{{ url_for('test') }}" method="get">
-            <textarea class="pure-input-3-4" style="height: 150px" readonly>ssh-keygen -t rsa -b 4096 -f temp.rsa -N ''</textarea>
-            <button type="submit" class="pure-button pure-button-primary" style="margin-top: 110px">confirm</button>
+            <textarea class="pure-input-3-4" style="height: 150px" readonly>{{command}}</textarea>
+            <button type="submit" class="pure-button pure-button-primary" style="margin-top: 110px">generate</button>
         </form> 
     </div>
     <div class="output">
