@@ -3,20 +3,51 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/pure.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 	<title>SQ-Util</title>
 </head>
 <body>
 	<div class="pure-g">
-	    <div class="pure-u-1-8">
-	    	<div class="logo">
-	    		
+	    <div class="pure-u-1-6 left-column">
+	    	<div class="pure-img logo">
+	    		<img src="/static/img/sq-logo.png">
 	    	</div>
+	    	<div class="pure-menu custom-restricted-width">
+			    <ul class="pure-menu-list">
+			        <li class="pure-menu-item pure-menu-selected"><a href="/" class="pure-menu-link">Usage</a></li>
+			        <li class="pure-menu-item"><a href="/ssh" class="pure-menu-link">SSH</a></li>
+			        <li class="pure-menu-item"><a href="/gunpg" class="pure-menu-link">GnuPG</a></li>
+			    </ul>
+			</div>
 	    </div>
-	    <div class="pure-u-7-8">
-	    	
+	    <div class="pure-u-5-6 right-column">
+	    	{% block content %}
+				<table class="pure-table">
+				    <thead>
+				        <tr>
+				            <th>#</th>
+				            <th>function</th>
+				            <th>description</th>
+				        </tr>
+				    </thead>
+
+				    <tbody>
+				        <tr>
+				        	<td>1</td>
+				            <td>SSH</td>
+				            <td>xxx</td>
+				        </tr>
+
+				        <tr>
+				        	<td>2</td>
+				            <td>GunPG</td>
+				            <td>ooo</td>
+				        </tr>
+		    
+				    </tbody>
+				</table>
+	    	{% endblock content %}
 	    </div>
 	</div>
 </body>

@@ -1,4 +1,29 @@
 .logo {
 	height: 100px;
-	background: #129fea;
+	text-align: center;
+}
+
+.left-column {
+	height: 640px;
+	background: #78909C;
+}
+
+.right-column {
+	height: 640px;
+	background: #EEEEEE;
+}
+
+.input {
+	height: 200px;
+	margin-left: 20px;
+}
+
+.output {
+	height: 400px;
+	margin-left: 20px;
+}
+
+p {
+	font-family: cursive;
+	font-size: 18px;
 }
