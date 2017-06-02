@@ -4,8 +4,13 @@
     <div class="input">
         <h2>Input</h2>
         <form class="pure-form" action="/ssh/generate">
-            <textarea class="pure-input-3-4" style="height: 150px" readonly>{{command}}</textarea>
-            <button type="submit" class="pure-button pure-button-primary" style="margin-top: 110px">generate</button>
+            <div class="pure-u-1 cmd">
+                CMD : <input class="pure-input-1-3" type="text" placeholder="ssh-keygen" disabled>
+            </div>
+            
+            <!-- <textarea class="pure-input-3-4" style="height: 150px" readonly>{{command}}</textarea> -->
+            <input type="radio"> 
+            <button type="submit" class="pure-button pure-button-primary">generate</button>
         </form> 
     </div>
     <div class="output">
