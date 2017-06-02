@@ -16,6 +16,13 @@ def ssh(action=None):
 
     if action:
       os.system("ssh-keygen -t rsa -b 4096 -f id_rsa -N ''")
+      f = open('id_rsa', 'r')
+      private_key = f.read()
+      f = open('id_rsa.pub', 'r')
+      public_key = f.read()
+      f.close()
+      os.remove('id_rsa')
+      os.remove('id_rsa.pub')
       
     return render_template('ssh.html', private_key=private_key, public_key=public_key)
 
