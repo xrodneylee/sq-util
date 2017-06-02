@@ -9,17 +9,19 @@ def index():
     return render_template('index.html')
 
 @app.route('/ssh')
-def ssh():
-    return render_template('ssh.html')
+@app.route('/ssh/<action>')
+def ssh(action=None):
+    private_key = 'Private Key'
+    public_key = 'Public Key'
+
+    if action:
+      os.system("ssh-keygen -t rsa -b 4096 -f id_rsa -N ''")
+      
+    return render_template('ssh.html', private_key=private_key, public_key=public_key)
 
 @app.route('/gunpg')
 def gunpg():
     return render_template('gunpg.html')
-
-@app.route('/test', methods=['GET'])
-def test():
-	os.system("ssh-keygen -t rsa -b 4096 -f id_rsa.pub -N ''")
-	return render_template('ssh.html', private_key='qq', public_key='qq')
 
 if __name__ == '__main__':
     app.run(debug=True)
