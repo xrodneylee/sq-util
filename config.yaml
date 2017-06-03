@@ -2,16 +2,16 @@ services:
   ssh:
     service: ssh
     description: Generate SSH public and secret keys.
-    cmd: ssh-keygen -f id_rsa
+    cmd: ssh-keygen -f id_rsa -N '' 
     input:
       requires:
-        - {"title":"key size in bits", "param":"-b", type":"radio", "group":[2048, 4096]}
-        - {"title":"the type of key to create", "type":"radio", "param":"-t", "group":["rsa", "dsa"]}
+        - {"title":"key size (bits)", "param":"-b", type":"radio", "group":[2048, 4096]}
       options:
         - {"title":"the type of key to create", "type":"radio", "param":"-t", "group":["rsa", "dsa"]}
       button:
         name: Generate
-        action: /ssh/generate
+        action: /ssh
+        methon: post
     output:
       - {"title":"Private Key", "type":"textarea"}
       - {"title":"Public Key", "type":"textarea"}
