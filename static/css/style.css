@@ -10,20 +10,27 @@
 }
 
 .left-column {
-	background: #78909C;
+	background: #252A3A;
+}
+
+#nav .pure-menu-link {
+    color: #fff;
+    margin-left: 0.5em;
+}
+
+#nav .pure-menu-link:hover, #nav .pure-menu-link:focus {
+    background: rgb(55, 60, 90);
 }
 
 .right-column {
-	background: #EEEEEE;
+	background: #FFFFFF;
 }
 
 .input {
-	height: 200px;
 	margin-left: 20px;
 }
 
 .output {
-	height: 400px;
 	margin-left: 20px;
 }
 

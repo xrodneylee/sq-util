@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import request
 import os
 app = Flask(__name__)
 
@@ -9,13 +10,15 @@ def index():
     return render_template('index.html')
 
 @app.route('/ssh')
-@app.route('/ssh/<action>')
+@app.route('/ssh/<action>', methods=['POST'])
 def ssh(action=None):
     private_key = 'Private Key'
     public_key = 'Public Key'
+    cmd = request.form.get('cmd')
+    keysize = request.form.get('keysize')
 
     if action:
-      os.system("ssh-keygen -t rsa -b 4096 -f id_rsa -N ''")
+      os.system(cmd + keysize)
       f = open('id_rsa', 'r')
       private_key = f.read()
       f = open('id_rsa.pub', 'r')
