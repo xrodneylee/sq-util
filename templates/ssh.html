@@ -1,38 +1,48 @@
 {% extends "index.html" %}
 {% block content %}
-<div class="ssh">
-    <div class="input">
-        <h2>Input</h2>
-        <form class="pure-form pure-form-aligned" action="/ssh/generate" method=post>
-            <fieldset>
-                <div class="pure-control-group">
-                    <label>description</label>
-                    <span>Generate SSH public and secret keys</span>
-                </div>
 
-                <div class="pure-control-group">
-                    <label for="cmd">base command</label>
-                    <input id="cmd" name="cmd" class="pure-input-1-3" type="text" value="ssh-keygen -f id_rsa -N '' " readonly>
-                </div>
-                
-                <div class="pure-control-group">
-                    <label for="keysize">key size (bits)</label>
-                    <input id="keysize" type="radio" name="keysize" value="-b 2048" checked> 2048
-                    <input id="keysize" type="radio" name="keysize" value="-b 4096"> 4096
-                </div>
-                
-                <div class="pure-controls">
-                    <button type="submit" class="pure-button pure-button-primary">generate</button>
-                </div>   
-            </fieldset>
-        </form> 
-    </div>
-    <div class="output">
-        <h2>Output</h2>
-        <form class="pure-form">
-            <textarea class="pure-input-3-4" placeholder="Private Key" style="height: 150px" readonly>{{private_key}}</textarea>
-            <textarea class="pure-input-3-4" placeholder="Public Key" style="height: 150px; margin-top: 10px" readonly>{{public_key}}</textarea>
-        </form> 
-    </div>
+<h1>SSH</h1>
+<div class="input">
+    <h2>Input</h2>
+    <form class="pure-form pure-form-aligned" action="/ssh" method=post>
+        <fieldset>
+            <div class="pure-control-group">
+                <label>description</label>
+                <span>Generate SSH public and secret keys</span>
+            </div>
+
+            <div class="pure-control-group">
+                <label>base command</label>
+                <input name="cmd" class="pure-input-1-3" type="text" value="ssh-keygen -f id_rsa -N '' " readonly>
+            </div>
+            
+            <div class="pure-control-group">
+                <label>key size (bits)</label>
+                <input type="radio" name="keysize" value="-b 2048" checked> 2048
+                <input type="radio" name="keysize" value="-b 4096"> 4096
+            </div>
+            
+            <div class="pure-controls">
+                <button type="submit" class="pure-button pure-button-primary">generate</button>
+            </div>   
+        </fieldset>
+    </form> 
 </div>
+<div class="output">
+    <h2>Output</h2>
+    <form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label>Private Key</label>
+            <textarea class="pure-input-1-2" placeholder="Private Key" style="height: 150px" readonly>{{private_key}}</textarea>
+        </div>
+        <div class="pure-control-group">
+            <label>Public Key</label>
+            <textarea class="pure-input-1-2" placeholder="Public Key" style="height: 150px" readonly>{{public_key}}</textarea>
+        </div>
+        
+        </fieldset>
+    </form> 
+</div>
+
 {% endblock content %}

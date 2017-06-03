@@ -1,40 +1,62 @@
-.wrap {
-	height: 100vh;
-	width: 100vw;
+h1 {
+	margin-left: 1em;
 }
 
-.logo {
-	height: 80px;
-	padding-top: 10px;
-	text-align: center;
+h2 {
+	margin-left: 2em;
 }
 
-.left-column {
-	background: #252A3A;
+a {
+    text-decoration: none;
 }
 
-#nav .pure-menu-link {
+#layout, #menu, #main {
+    margin: 0;
+    padding: 0;
+    font-family: Franklin Gothic;
+}
+
+#menu {
+    position: relative;
+    background: #252A3A;
+    text-align: center;
+    height:100vh;
+}
+
+#main {
+	height:100vh;
+}
+
+#menu .pure-menu {
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+
+#menu .pure-menu-link:hover,
+#menu .pure-menu-link:focus {
+    background: #373C5A;
+}
+
+#menu .pure-menu-link {
     color: #fff;
     margin-left: 0.5em;
 }
 
-#nav .pure-menu-link:hover, #nav .pure-menu-link:focus {
-    background: rgb(55, 60, 90);
+#menu .logo {
+    padding-top: 1em;
+    margin-bottom: 2em;
 }
 
-.right-column {
-	background: #FFFFFF;
+#main .pure-table {
+	margin-left: 2em;
 }
 
-.input {
-	margin-left: 20px;
-}
-
-.output {
-	margin-left: 20px;
-}
-
-p {
-	font-family: cursive;
-	font-size: 18px;
+.footer {
+	font-size: 0.5em;
+	text-align: center;
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

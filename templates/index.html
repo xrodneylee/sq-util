@@ -3,53 +3,54 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/pure.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-	<script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
 	<title>SQ-Util</title>
 </head>
 <body>
-	<div class="pure-g wrap">
-	    <div id="nav" class="pure-u-1-6 left-column">
-	    	<div class="pure-img logo">
-	    		<img src="/static/img/sq-logo.png">
-	    	</div>
-	    	<div class="pure-menu custom-restricted-width">
+	<div id="layout" class="content pure-g">
+		<div id="menu" class="pure-u-2-24">
+	    	<a href="/">
+	    		<img class="logo" src="/static/img/logo.png">
+	    	</a>
+			<div class="pure-menu">
 			    <ul class="pure-menu-list">
-			        <li class="pure-menu-item pure-menu-selected"><a href="/" class="pure-menu-link">Usage</a></li>
 			        <li class="pure-menu-item"><a href="/ssh" class="pure-menu-link">SSH</a></li>
-			        <li class="pure-menu-item"><a href="/gunpg" class="pure-menu-link">GnuPG</a></li>
+			        <li class="pure-menu-item"><a href="#" class="pure-menu-link">GnuPG</a></li>
 			    </ul>
+			</div>			
+		</div>
+		<div id="main" class="pure-u-22-24">
+			{% block content %}
+			<h1>Overview</h1>
+			<table class="pure-table">
+			    <thead>
+			        <tr>
+			            <th>#</th>
+			            <th>service</th>
+			            <th>description</th>
+			        </tr>
+			    </thead>
+
+			    <tbody>
+			        <tr>
+			        	<td>1</td>
+			            <td>SSH</td>
+			            <td>Generate SSH public and secret keys</td>
+			        </tr>
+			        <tr class="pure-table-odd">
+			        	<td>2</td>
+			            <td>GunPG</td>
+			            <td>ooo</td>
+			        </tr>		    
+			    </tbody>
+			</table>
+			{% endblock content %}
+			<div class="footer">
+				<p>© 2017 Software Quality</p>
 			</div>
-	    </div>
-	    <div class="pure-u-5-6 right-column">
-	    	{% block content %}
-				<table class="pure-table">
-				    <thead>
-				        <tr>
-				            <th>#</th>
-				            <th>service</th>
-				            <th>description</th>
-				        </tr>
-				    </thead>
-
-				    <tbody>
-				        <tr class="pure-table-odd">
-				        	<td>1</td>
-				            <td>SSH</td>
-				            <td>Generate SSH public and secret keys</td>
-				        </tr>
-
-				        <tr>
-				        	<td>2</td>
-				            <td>GunPG</td>
-				            <td>ooo</td>
-				        </tr>
-		    
-				    </tbody>
-				</table>
-	    	{% endblock content %}
-	    </div>
+		</div>
 	</div>
 </body>
 </html>

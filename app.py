@@ -10,14 +10,14 @@ def index():
     return render_template('index.html')
 
 @app.route('/ssh')
-@app.route('/ssh/<action>', methods=['POST'])
+@app.route('/ssh', methods=['POST'])
 def ssh(action=None):
     private_key = 'Private Key'
     public_key = 'Public Key'
     cmd = request.form.get('cmd')
     keysize = request.form.get('keysize')
 
-    if action:
+    if request.method == 'POST':
       os.system(cmd + keysize)
       f = open('id_rsa', 'r')
       private_key = f.read()
