@@ -11,7 +11,7 @@ def index():
 
 @app.route('/ssh')
 @app.route('/ssh', methods=['POST'])
-def ssh(action=None):
+def ssh():
     private_key = 'Private Key'
     public_key = 'Public Key'
     cmd = request.form.get('cmd')
