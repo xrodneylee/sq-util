@@ -4,51 +4,51 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/pure.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/pure.css') }}"> -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/guanpu.css') }}">
 	<title>SQ-Util</title>
 </head>
 <body>
-	<div id="layout" class="content pure-g">
-		<div id="menu" class="pure-u-2-24">
-	    	<a href="/">
-	    		<img class="logo" src="/static/img/logo.png">
-	    	</a>
-			<div class="pure-menu">
-			    <ul class="pure-menu-list">
-			        <li class="pure-menu-item"><a href="/ssh" class="pure-menu-link">SSH</a></li>
-			        <li class="pure-menu-item"><a href="#" class="pure-menu-link">GnuPG</a></li>
-			    </ul>
-			</div>			
+	<div class="wrap">
+		<div class="menu">
+			<div class="logo">
+				<a href="/">
+					<img src="/static/img/logo.png">
+				</a>
+			</div>
+			<ul>
+				<!-- for loop produce function -->
+				<li><a href="#">SSH</a></li>
+				<li><a href="#">GunPG</a></li>
+			</ul>
 		</div>
-		<div id="main" class="pure-u-22-24">
-			{% block content %}
-			<h1>Overview</h1>
-			<table class="pure-table">
-			    <thead>
-			        <tr>
-			            <th>#</th>
-			            <th>service</th>
-			            <th>description</th>
-			        </tr>
-			    </thead>
-
-			    <tbody>
-			        <tr>
-			        	<td>1</td>
-			            <td>SSH</td>
-			            <td>Generate SSH public and secret keys</td>
-			        </tr>
-			        <tr class="pure-table-odd">
-			        	<td>2</td>
-			            <td>GunPG</td>
-			            <td>ooo</td>
-			        </tr>		    
-			    </tbody>
-			</table>
-			{% endblock content %}
+		<div class="main">
+			<div class="content">
+				{% block content %}
+				<h1>Overview</h1>
+				<div class="overview">
+					<table>
+				        <tr>
+				            <th>#</th>
+				            <th>service</th>
+				            <th>description</th>
+				        </tr>
+				        <tr>
+				        	<td>1</td>
+				            <td>SSH</td>
+				            <td>Generate SSH public and secret keys</td>
+				        </tr>
+				        <tr>
+				        	<td>2</td>
+				            <td>GunPG</td>
+				            <td>ooo</td>
+				        </tr>		    
+					</table>
+				</div>
+				{% endblock content %}
+			</div>
 			<div class="footer">
-				<p>© 2017 Software Quality</p>
+				© 2017 Software Quality
 			</div>
 		</div>
 	</div>

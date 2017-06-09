@@ -1,0 +1,122 @@
+/* css reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	/*font-size: 100%;*/
+	/*font: inherit;*/
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**/
+/*.content, .footer {
+	border: 2px solid red; 
+}*/
+
+html, body, .wrap, .menu, .main {
+	height: 100%;
+	font-family: Franklin Gothic;
+}
+
+h1 {
+	padding: .5em;
+}
+
+table, th, td {
+    text-align: left;
+    padding: .5em;
+    border: 1px solid #ddd;
+}
+
+th {
+	background-color: #e0e0e0;
+	font-size: 1.2em;
+}
+
+tr:nth-child(odd) {
+	background-color: #f2f2f2
+}
+
+.wrap {
+	margin: 0 auto 0 auto;
+}
+
+.menu {
+	position: fixed;
+	width: 7.5em;
+	background: #252A3A;
+    text-align: center;
+}
+
+.logo {
+	padding: 1em;
+}
+
+.menu a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.menu li {
+	padding: .5em 1.5em;
+	text-align: left;
+}
+
+.menu li:hover {
+	background: #373C5A;
+}
+
+.main {
+	margin-left: 7.5em;
+}
+
+.content {
+	height: 100%;
+}
+
+.overview {
+	padding: 1.5em;
+}
+
+.footer {
+	text-align: center;
+	font-size: .5em;
+	height: 1.5em;
+	bottom: 0;
+	position: relative;
+}
