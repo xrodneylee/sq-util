@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 import os
+import yaml
 app = Flask(__name__)
 
 
@@ -31,7 +32,11 @@ def ssh():
 
 @app.route('/gunpg')
 def gunpg():
-    return render_template('gunpg.html')
+    html = 'index'
+    stream = open('config.yaml', 'r')
+    data = yaml.load(stream)
+
+    return render_template('ssh.html', private_key=data)
 
 if __name__ == '__main__':
     app.run(debug=True)

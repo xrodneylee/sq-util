@@ -1,24 +1,11 @@
 {% extends "index.html" %}
 {% block content %}
-
 <h1>SSH</h1>
 <div class="console">
-    <fieldset>
-        <legend>Input</legend>
-        <form action="/ssh" method="post">
-        
-        </form>
-    </fieldset>
-
-    <fieldset>
-        <legend>Output</legend>
-
-    </fieldset>
-</div>
-<!-- <div class="input">
-    <h2>Input</h2>
-    <form class="pure-form pure-form-aligned" action="/ssh" method=post>
+    <form class="pure-form pure-form-aligned" action="/ssh" method="post">
         <fieldset>
+            <legend>Input</legend>
+
             <div class="pure-control-group">
                 <label>description</label>
                 <span>Generate SSH public and secret keys</span>
@@ -37,25 +24,24 @@
             
             <div class="pure-controls">
                 <button type="submit" class="pure-button pure-button-primary">generate</button>
-            </div>   
+            </div> 
         </fieldset>
-    </form> 
-</div>
-<div class="output">
-    <h2>Output</h2>
-    <form class="pure-form pure-form-aligned">
-    <fieldset>
-        <div class="pure-control-group">
-            <label>Private Key</label>
-            <textarea class="pure-input-1-2" placeholder="Private Key" style="height: 150px" readonly>{{private_key}}</textarea>
-        </div>
-        <div class="pure-control-group">
-            <label>Public Key</label>
-            <textarea class="pure-input-1-2" placeholder="Public Key" style="height: 150px" readonly>{{public_key}}</textarea>
-        </div>
-        
-        </fieldset>
-    </form> 
-</div> -->
+    </form>
 
+    <form class="pure-form pure-form-aligned">
+        <fieldset>
+            <legend>Output</legend>
+
+            <div class="pure-control-group">
+                <label>Private Key</label>
+                <textarea class="pure-input-1-2" placeholder="Private Key" style="height: 150px" readonly>{{private_key}}</textarea>
+            </div>
+
+            <div class="pure-control-group">
+                <label>Public Key</label>
+                <textarea class="pure-input-1-2" placeholder="Public Key" style="height: 150px" readonly>{{public_key}}</textarea>
+            </div>
+        </fieldset>
+    </form>
+</div>
 {% endblock content %}

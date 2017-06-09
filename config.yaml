@@ -5,9 +5,9 @@ services:
     cmd: ssh-keygen -f id_rsa -N '' 
     input:
       requires:
-        - {"title":"key size (bits)", "param":"-b", type":"radio", "group":[2048, 4096]}
+        - aaa
       options:
-        - {"title":"the type of key to create", "type":"radio", "param":"-t", "group":["rsa", "dsa"]}
+        - bbb
       button:
         name: Generate
         action: /ssh
