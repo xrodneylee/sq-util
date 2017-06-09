@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+import logging
+from logging.handlers import RotatingFileHandler
 import os
 import yaml
 app = Flask(__name__)
@@ -35,7 +37,7 @@ def gunpg():
     html = 'index'
     stream = open('config.yaml', 'r')
     data = yaml.load(stream)
-
+    app.logger.info(data)
     return render_template('ssh.html', private_key=data)
 
 if __name__ == '__main__':
