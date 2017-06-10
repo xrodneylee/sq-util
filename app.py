@@ -1,8 +1,6 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-import logging
-from logging.handlers import RotatingFileHandler
 import os
 import yaml
 app = Flask(__name__)
