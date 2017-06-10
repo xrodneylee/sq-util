@@ -7,6 +7,12 @@ import os
 import yaml
 app = Flask(__name__)
 
+@app.before_first_request
+def init_html():
+    file = open('qq.html', 'a', encoding='UTF-8')
+    file.write('test')
+    file.close()
+    app.logger.info('Hello world again!')
 
 @app.route('/')
 def index():
