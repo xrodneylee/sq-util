@@ -49,4 +49,7 @@ def ssh():
     return render_template('ssh.html', private_key=private_key, public_key=public_key)
 
 if __name__ == '__main__':
+    # handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
+    # handler.setLevel(logging.INFO)
+    # app.logger.addHandler(handler)
     app.run(debug=True)
