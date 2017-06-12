@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+import logging
+from logging.handlers import RotatingFileHandler
 import os
 import yaml
 app = Flask(__name__)
@@ -14,42 +16,52 @@ def init_html():
     for service in data:
       html_str = '{% extends "index.html" %}\n'
       html_str += '{% block content %}\n'
-      html_str += '<h1>' + service + '</h1>'
+      html_str += '<h1>' + service + '</h1>\n'
       html_str += '{% endblock content %}'
       file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
       file.write(html_str)
-      app.logger.info(service)
-      app.logger.info(data[service])
-      app.logger.info(html_str)
+      # app.logger.info(service)
+      # app.logger.info(data[service])
+      # app.logger.info(html_str)
 
     file.close()
 
 @app.route('/')
-def index():
+@app.route('/<service>')
+@app.route('/<service>', methods=['POST'])
+def index(service=None):
+    app.logger.info('request url=' + str(service))
+    if service:
+      return render_template(service + '.html')
     return render_template('index.html')
 
-@app.route('/ssh')
-@app.route('/ssh', methods=['POST'])
-def ssh():
-    private_key = 'Private Key'
-    public_key = 'Public Key'
-    cmd = request.form.get('cmd')
-    keysize = request.form.get('keysize')
+# @app.route('/ssh')
+# @app.route('/ssh', methods=['POST'])
+# def ssh():
+#     private_key = 'Private Key'
+#     public_key = 'Public Key'
+#     cmd = request.form.get('cmd')
+#     keysize = request.form.get('keysize')
 
-    if request.method == 'POST':
-      os.system(cmd + keysize)
-      f = open('id_rsa', 'r')
-      private_key = f.read()
-      f = open('id_rsa.pub', 'r')
-      public_key = f.read()
-      f.close()
-      os.remove('id_rsa')
-      os.remove('id_rsa.pub')
+#     if request.method == 'POST':
+#       os.system(cmd + keysize)
+#       f = open('id_rsa', 'r')
+#       private_key = f.read()
+#       f = open('id_rsa.pub', 'r')
+#       public_key = f.read()
+#       f.close()
+#       os.remove('id_rsa')
+#       os.remove('id_rsa.pub')
       
-    return render_template('ssh.html', private_key=private_key, public_key=public_key)
+#     return render_template('ssh.html', private_key=private_key, public_key=public_key)
+
+# @app.route('/gunpg')
+# def gunpg():
+#     app.logger.info(request)
+#     return render_template('gunpg.html')
 
 if __name__ == '__main__':
-    # handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
-    # handler.setLevel(logging.INFO)
-    # app.logger.addHandler(handler)
+    handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
     app.run(debug=True)
