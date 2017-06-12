@@ -4,7 +4,5 @@ sshs:
   elem2:
     - data
 gunpg:
-  elem1:
-    - data
-  elem2:
-    - data
+  elem1: aata
+  elem2: data

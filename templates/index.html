@@ -17,9 +17,10 @@
 				</a>
 			</div>
 			<ul>
-				<!-- for loop produce function -->
 				<li><a href="/ssh">SSH</a></li>
-				<li><a href="/gunpg">GunPG</a></li>
+				{% for service in data %}
+    			  <li><a href="{{service}}">{{service}}</a></li>
+				{% endfor %}	
 			</ul>
 		</div>
 		<div class="main">

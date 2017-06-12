@@ -5,15 +5,16 @@ from logging.handlers import RotatingFileHandler
 import logging
 import os
 import yaml
+# import yamlordereddictloader
 
 app = Flask(__name__)
 templates_path = 'templates/'
 config_file = 'template.yaml'
+stream = open(config_file, 'r')#, Loader=yamlordereddictloader.Loader
+data = yaml.safe_load(stream)
 
 @app.before_first_request
 def init_html():
-    stream = open(config_file, 'r')
-    data = yaml.safe_load(stream)
     for service in data:
       app.logger.info('init html=' + service)
       html_str = '{% extends "index.html" %}\n'
@@ -27,7 +28,7 @@ def init_html():
       for element in data[service]:
         html_str += '<div class="pure-control-group">\n'
         html_str += '<label>' + element + '</label>'
-        html_str += '<span>' + element + '</span>'
+        # html_str += '<span>' + data[service][element] + '</span>'
         # if element == 'description':
         #   html_str += ''
 
@@ -55,8 +56,8 @@ def init_html():
 def index(service=None):
     app.logger.info('request url=' + str(service))
     if service:
-      return render_template(service + '.html')
-    return render_template('index.html')
+      return render_template(service + '.html', data=data)
+    return render_template('index.html', data=data)
 
 # @app.route('/ssh')
 # @app.route('/ssh', methods=['POST'])

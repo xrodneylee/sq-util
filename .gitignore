@@ -3,3 +3,5 @@ id_rsa.pub
 .idea
 __pycache__
 app.log
+templates/*
+!templates/index.html
