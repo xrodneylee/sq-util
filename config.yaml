@@ -7,6 +7,8 @@ ssh:
         - 2048
         - 4096
     button:
+      tag: button
+      type: submit
       name: Generate
       action: ssh-keygen -b $KEY_LENGTH -f id_rsa.pub -N ''  
   output:
