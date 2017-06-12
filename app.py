@@ -30,20 +30,30 @@ def init_html():
       html_str += '<legend>Input</legend>'
 
       for element in data[service]:
-        html_str += '<div class="pure-control-group">'
+        
 
         if element == 'description':
+          html_str += '<div class="pure-control-group">'
           html_str += '<label>' + element + '</label>'
           html_str += '<span>' + data[service][element] + '</span>'
+
         elif element == 'input':
           for fields in data[service][element]:
-            html_str += '<label>' + fields + '</label>'
-            for field in data[service][element][fields]:
-              if field == 'select':
-                html_str += '<select class="pure-input-1-3">'
-                # for option in field
-                #   html_str += '<option>' + option.pop() + '/<option>'
-                html_str += '</select>'
+            if fields == 'button':
+              html_str += '<div class="pure-controls">'
+              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][fields]['name'] + '</button>'
+              html_str += '</div>'
+            else:
+              html_str += '<div class="pure-control-group">'
+              html_str += '<label>' + fields + '</label>'
+              for field in data[service][element][fields]:
+                if field == 'type':
+                  html_str += '<select class="pure-input-1-3">'
+                elif field == 'option':
+                  for option in data[service][element][fields][field]:
+                    html_str += '<option>' + str(option) + '</option>'
+                  html_str += '</select>'
+            
 
         elif element == 'output':
           pass

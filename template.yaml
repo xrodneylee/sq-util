@@ -6,8 +6,9 @@ sshs:
       option:
         - 2048
         - 4096
-  elem2:
-    - data
+    button:
+      name: Generate
+      action: ssh-keygen -b $KEY_LENGTH -f id_rsa.pub -N ''  
 gunpg:
   description: gunpg
   input:
