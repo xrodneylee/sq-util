@@ -13,37 +13,56 @@ config_file = 'template.yaml'
 stream = open(config_file, 'r')#, Loader=yamlordereddictloader.Loader
 data = yaml.safe_load(stream)
 
+@app.context_processor
+def inject_enumerate():
+    return dict(enumerate=enumerate)
+
 @app.before_first_request
 def init_html():
     for service in data:
       app.logger.info('init html=' + service)
-      html_str = '{% extends "index.html" %}\n'
-      html_str += '{% block content %}\n'
-      html_str += '<h1>' + service + '</h1>\n'
-      html_str += '<div class="console">\n'
-      html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
-      html_str += '<fieldset>\n'
-      html_str += '<legend>Input</legend>\n'
+      html_str = '{% extends "index.html" %}'
+      html_str += '{% block content %}'
+      html_str += '<h1>' + service + '</h1>'
+      html_str += '<div class="console">'
+      html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">'
+      html_str += '<fieldset>'
+      html_str += '<legend>Input</legend>'
 
       for element in data[service]:
-        html_str += '<div class="pure-control-group">\n'
-        html_str += '<label>' + element + '</label>'
-        # html_str += '<span>' + data[service][element] + '</span>'
-        # if element == 'description':
-        #   html_str += ''
+        html_str += '<div class="pure-control-group">'
 
+        if element == 'description':
+          html_str += '<label>' + element + '</label>'
+          html_str += '<span>' + data[service][element] + '</span>'
+        elif element == 'input':
+          for fields in data[service][element]:
+            html_str += '<label>' + fields + '</label>'
+            for field in data[service][element][fields]:
+              if field == 'select':
+                html_str += '<select class="pure-input-1-3">'
+                # for option in field
+                #   html_str += '<option>' + option.pop() + '/<option>'
+                html_str += '</select>'
 
-      html_str += '</fieldset>\n'
-      html_str += '</form>\n'
+        elif element == 'output':
+          pass
+        else:
+          app.logger.info(element + ' is wrong configuration!')
+
+        html_str += '</div>'
+
+      html_str += '</fieldset>'
+      html_str += '</form>'
       html_str += '<form class="pure-form pure-form-aligned">'
-      html_str += '<fieldset>\n'
-      html_str += '<legend>Output</legend>\n'
+      html_str += '<fieldset>'
+      html_str += '<legend>Output</legend>'
 
 
 
-      html_str += '</fieldset>\n'
-      html_str += '</form>\n'
-      html_str += '</div>\n'
+      html_str += '</fieldset>'
+      html_str += '</form>'
+      html_str += '</div>'
       html_str += '{% endblock content %}'
       file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
       file.write(html_str)
@@ -56,8 +75,8 @@ def init_html():
 def index(service=None):
     app.logger.info('request url=' + str(service))
     if service:
-      return render_template(service + '.html', data=data)
-    return render_template('index.html', data=data)
+      return render_template(service + '.html', menu=data)
+    return render_template('index.html', menu=data)
 
 # @app.route('/ssh')
 # @app.route('/ssh', methods=['POST'])

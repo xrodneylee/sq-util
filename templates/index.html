@@ -18,7 +18,7 @@
 			</div>
 			<ul>
 				<li><a href="/ssh">SSH</a></li>
-				{% for service in data %}
+				{% for service in menu %}
     			  <li><a href="{{service}}">{{service}}</a></li>
 				{% endfor %}	
 			</ul>
@@ -34,16 +34,13 @@
 				            <th>service</th>
 				            <th>description</th>
 				        </tr>
-				        <tr>
-				        	<td>1</td>
-				            <td>SSH</td>
-				            <td>Generate SSH public and secret keys</td>
+				        {% for index, service in enumerate(menu, start=1) %}
+						<tr>
+				        	<td>{{index}}</td>
+				            <td>{{service}}</td>
+				            <td>{{menu[service].description}}</td>
 				        </tr>
-				        <tr>
-				        	<td>2</td>
-				            <td>GunPG</td>
-				            <td>ooo</td>
-				        </tr>		    
+				        {% endfor %}		    
 					</table>
 				</div>
 				{% endblock content %}
