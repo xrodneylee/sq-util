@@ -2,7 +2,7 @@ ssh:
   description: Generate SSH public and secret keys.
   input:
     key size (bits):
-      type: select
+      tag: select
       option:
         - 2048
         - 4096
@@ -11,4 +11,4 @@ ssh:
       action: ssh-keygen -b $KEY_LENGTH -f id_rsa.pub -N ''  
   output:
     result:
-      type: textarea
+      tag: textarea

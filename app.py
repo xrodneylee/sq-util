@@ -47,7 +47,7 @@ def init_html():
               html_str += '<div class="pure-control-group">'
               html_str += '<label>' + fields + '</label>'
               for field in data[service][element][fields]:
-                if field == 'type':
+                if field == 'tag':
                   html_str += '<select class="pure-input-1-3">'
                 elif field == 'option':
                   for option in data[service][element][fields][field]:
