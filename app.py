@@ -31,36 +31,29 @@ def init_html():
 
       for element in data[service]:
         
-
         if element == 'description':
           html_str += '<div class="pure-control-group">'
           html_str += '<label>' + element + '</label>'
           html_str += '<span>' + data[service][element] + '</span>'
+          html_str += '</div>'
 
         elif element == 'input':
-          for fields in data[service][element]:
-            if fields == 'button':
+          for tag in data[service][element]:
+            if tag == 'button':
               html_str += '<div class="pure-controls">'
-              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][fields]['name'] + '</button>'
+              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][tag]['name'] + '</button>'
               html_str += '</div>'
-            else:
+            elif tag == 'select':
               html_str += '<div class="pure-control-group">'
-              html_str += '<label>' + fields + '</label>'
-              for field in data[service][element][fields]:
-                if field == 'tag':
-                  html_str += '<select class="pure-input-1-3">'
-                elif field == 'option':
-                  for option in data[service][element][fields][field]:
-                    html_str += '<option>' + str(option) + '</option>'
-                  html_str += '</select>'
-            
+              html_str += '<label>' + data[service][element][tag]['name'] + '</label>'
+              html_str += '<select class="pure-input-1-3">'
+              for option in data[service][element][tag]['option']:
+                html_str += '<option>' + str(option) + '</option>'
+              html_str += '</select>'
+              html_str += '</div>'
 
-        elif element == 'output':
-          pass
         else:
-          app.logger.info(element + ' is wrong configuration!')
-
-        html_str += '</div>'
+          pass
 
       html_str += '</fieldset>'
       html_str += '</form>'
@@ -68,7 +61,17 @@ def init_html():
       html_str += '<fieldset>'
       html_str += '<legend>Output</legend>'
 
-
+      for element in data[service]:
+        
+        if element == 'output':
+          for tag in data[service][element]:
+            if tag == 'textarea':
+              html_str += '<div class="pure-control-group">'
+              html_str += '<label>' + data[service][element][tag]['name'] + '</label>'
+              html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>'
+              html_str += '</div>'
+            else:
+              pass
 
       html_str += '</fieldset>'
       html_str += '</form>'
