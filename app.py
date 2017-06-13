@@ -35,61 +35,61 @@ def inject_enumerate():
 def init_html():
     for service in data:
       app.logger.info('init html=' + service)
-      html_str = '{% extends "index.html" %}'
-      html_str += '{% block content %}'
-      html_str += '<h1>' + service + '</h1>'
-      html_str += '<div class="console">'
-      html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">'
-      html_str += '<fieldset>'
-      html_str += '<legend>Input</legend>'
+      html_str = '{% extends "index.html" %}\n'
+      html_str += '{% block content %}\n'
+      html_str += '<h1>' + service + '</h1>\n'
+      html_str += '<div class="console">\n'
+      html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
+      html_str += '<fieldset>\n'
+      html_str += '<legend>Input</legend>\n'
 
       for element in data[service]:
         
         if element == 'description':
-          html_str += '<div class="pure-control-group">'
-          html_str += '<label>' + element + '</label>'
-          html_str += '<span>' + data[service][element] + '</span>'
-          html_str += '</div>'
+          html_str += '<div class="pure-control-group">\n'
+          html_str += '<label>' + element + '</label>\n'
+          html_str += '<span>' + data[service][element] + '</span>\n'
+          html_str += '</div>\n'
 
         elif element == 'input':
           for tag in data[service][element]:
             if tag == 'button':
-              html_str += '<div class="pure-controls">'
-              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][tag]['name'] + '</button>'
-              html_str += '</div>'
+              html_str += '<div class="pure-controls">\n'
+              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][tag]['name'] + '</button>\n'
+              html_str += '</div>\n'
             elif tag == 'select':
-              html_str += '<div class="pure-control-group">'
-              html_str += '<label>' + data[service][element][tag]['name'] + '</label>'
-              html_str += '<select class="pure-input-1-3">'
+              html_str += '<div class="pure-control-group">\n'
+              html_str += '<label>' + data[service][element][tag]['name'] + '</label>\n'
+              html_str += '<select class="pure-input-1-3">\n'
               for option in data[service][element][tag]['option']:
-                html_str += '<option>' + str(option) + '</option>'
-              html_str += '</select>'
-              html_str += '</div>'
+                html_str += '<option>' + str(option) + '</option>\n'
+              html_str += '</select>\n'
+              html_str += '</div>\n'
 
         else:
           pass
 
-      html_str += '</fieldset>'
-      html_str += '</form>'
-      html_str += '<form class="pure-form pure-form-aligned">'
-      html_str += '<fieldset>'
-      html_str += '<legend>Output</legend>'
+      html_str += '</fieldset>\n'
+      html_str += '</form>\n'
+      html_str += '<form class="pure-form pure-form-aligned">\n'
+      html_str += '<fieldset>\n'
+      html_str += '<legend>Output</legend>\n'
 
       for element in data[service]:
         
         if element == 'output':
           for tag in data[service][element]:
             if tag == 'textarea':
-              html_str += '<div class="pure-control-group">'
-              html_str += '<label>' + data[service][element][tag]['name'] + '</label>'
-              html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>'
-              html_str += '</div>'
+              html_str += '<div class="pure-control-group">\n'
+              html_str += '<label>' + data[service][element][tag]['name'] + '</label>\n'
+              html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>\n'
+              html_str += '</div>\n'
             else:
               pass
 
-      html_str += '</fieldset>'
-      html_str += '</form>'
-      html_str += '</div>'
+      html_str += '</fieldset>\n'
+      html_str += '</form>\n'
+      html_str += '</div>\n'
       html_str += '{% endblock content %}'
       file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
       file.write(html_str)
