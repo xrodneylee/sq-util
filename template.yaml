@@ -1,4 +1,4 @@
-sshs:
+SSH:
   description: Generate SSH public and secret keys.
   input:
     select:
@@ -12,7 +12,7 @@ sshs:
   output:
     textarea:
       name: result
-gunpg:
+GunPG:
   description: gunpg
   input:
     select:
