@@ -1,17 +1,31 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from collections import OrderedDict
 from logging.handlers import RotatingFileHandler
 import logging
 import os
 import yaml
-# import yamlordereddictloader
 
 app = Flask(__name__)
 templates_path = 'templates/'
 config_file = 'template.yaml'
-stream = open(config_file, 'r')#, Loader=yamlordereddictloader.Loader
-data = yaml.safe_load(stream)
+
+def ordered_yaml_load(yaml_path, Loader=yaml.Loader,
+                    object_pairs_hook=OrderedDict):
+    class OrderedLoader(Loader):
+        pass
+
+    def construct_mapping(loader, node):
+        loader.flatten_mapping(node)
+        return object_pairs_hook(loader.construct_pairs(node))
+    OrderedLoader.add_constructor(
+        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+        construct_mapping)
+    with open(yaml_path) as stream:
+        return yaml.load(stream, OrderedLoader)
+
+data = ordered_yaml_load(config_file)
 
 @app.context_processor
 def inject_enumerate():
@@ -115,6 +129,7 @@ def index(service=None):
 # def gunpg():
 #     app.logger.info(request)
 #     return render_template('gunpg.html')
+
 
 if __name__ == '__main__':
     handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
