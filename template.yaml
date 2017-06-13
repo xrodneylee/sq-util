@@ -12,6 +12,9 @@ SSH:
   output:
     textarea:
       name: result
+      content:
+        - id_rsa
+        - id_rsa.pub
 GunPG:
   description: gunpg
   input:
