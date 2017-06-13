@@ -69,7 +69,7 @@ def init_html():
             elif data[service][element][field]['tag'] == 'input':
               html_str += '<div class="pure-control-group">\n'
               html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-              html_str += '<input name="' + data[service][element][field]['name'] + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
+              html_str += '<input name="' + data[service][element][field]['variable'] + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
               html_str += '</div>\n'
 
         else:

@@ -10,10 +10,12 @@ SSH:
         - 4096
     pass:
       name: pass
+      variable: pass
       tag: input
       type: password
     kkk:
       name: kkk
+      variable: kkk
       tag: input
       type: text
     button:
