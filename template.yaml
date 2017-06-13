@@ -8,20 +8,15 @@ SSH:
       option:
         - 2048
         - 4096
-    pass:
-      name: pass
-      variable: pass
-      tag: input
-      type: password
-    kkk:
-      name: kkk
-      variable: kkk
+    type:
+      name: type
+      variable: TYPE
       tag: input
       type: text
     button:
       tag: button
       name: Generate
-      action: ssh-keygen -b $KEY_LENGTH -f id_rsa -N ''
+      action: ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
     result:
       name: result
