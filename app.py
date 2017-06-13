@@ -52,18 +52,24 @@ def init_html():
           html_str += '</div>\n'
 
         elif element == 'input':
-          for tag in data[service][element]:
-            if tag == 'button':
+          for field in data[service][element]:
+            if data[service][element][field]['tag'] == 'button':
               html_str += '<div class="pure-controls">\n'
-              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][tag]['name'] + '</button>\n'
+              html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
+              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][field]['name'] + '</button>\n'
               html_str += '</div>\n'
-            elif tag == 'select':
+            elif data[service][element][field]['tag'] == 'select':
               html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][tag]['name'] + '</label>\n'
-              html_str += '<select class="pure-input-1-3">\n'
-              for option in data[service][element][tag]['option']:
-                html_str += '<option>' + str(option) + '</option>\n'
+              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+              html_str += '<select name="' + data[service][element][field]['variable'] + '" class="pure-input-1-3">\n'
+              for option in data[service][element][field]['option']:
+                html_str += '<option value="' + str(option) + '">' + str(option) + '</option>\n'
               html_str += '</select>\n'
+              html_str += '</div>\n'
+            elif data[service][element][field]['tag'] == 'input':
+              html_str += '<div class="pure-control-group">\n'
+              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+              html_str += '<input name="' + data[service][element][field]['name'] + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
               html_str += '</div>\n'
 
         else:
@@ -78,10 +84,10 @@ def init_html():
       for element in data[service]:
         
         if element == 'output':
-          for tag in data[service][element]:
-            if tag == 'textarea':
+          for field in data[service][element]:
+            if data[service][element][field]['tag'] == 'textarea':
               html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][tag]['name'] + '</label>\n'
+              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
               html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>\n'
               html_str += '</div>\n'
             else:
@@ -100,36 +106,24 @@ def init_html():
 @app.route('/<service>')
 @app.route('/<service>', methods=['POST'])
 def index(service=None):
-    app.logger.info('request url=' + str(service))
-    if service:
+    if request.method == 'POST':
+      action=request.form.get('action')
+      result = ''
+      for key in request.form:
+        if key != 'action':
+          app.logger.info(key + '=' + request.form.get(key))
+          action = str(action).replace('$'+key, request.form.get(key))
+      os.system(action)
+      for file in data[service]['output']['result']['content']:
+        f = open(file, 'r')
+        result += f.read() + '\n\n\n\n\n'
+      f.close()
+      for file in data[service]['output']['result']['content']:
+        os.remove(file)      
+      return render_template(service + '.html', menu=data, result=result)
+    elif service:
       return render_template(service + '.html', menu=data)
     return render_template('index.html', menu=data)
-
-# @app.route('/ssh')
-# @app.route('/ssh', methods=['POST'])
-# def ssh():
-#     private_key = 'Private Key'
-#     public_key = 'Public Key'
-#     cmd = request.form.get('cmd')
-#     keysize = request.form.get('keysize')
-
-#     if request.method == 'POST':
-#       os.system(cmd + keysize)
-#       f = open('id_rsa', 'r')
-#       private_key = f.read()
-#       f = open('id_rsa.pub', 'r')
-#       public_key = f.read()
-#       f.close()
-#       os.remove('id_rsa')
-#       os.remove('id_rsa.pub')
-      
-#     return render_template('ssh.html', private_key=private_key, public_key=public_key)
-
-# @app.route('/gunpg')
-# def gunpg():
-#     app.logger.info(request)
-#     return render_template('gunpg.html')
-
 
 if __name__ == '__main__':
     handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)

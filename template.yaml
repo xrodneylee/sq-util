@@ -1,24 +1,38 @@
 SSH:
   description: Generate SSH public and secret keys.
   input:
-    select:
+    key-size:
       name: key size (bits)
+      variable: KEY_LENGTH
+      tag: select
       option:
         - 2048
         - 4096
+    pass:
+      name: pass
+      tag: input
+      type: password
+    kkk:
+      name: kkk
+      tag: input
+      type: text
     button:
+      tag: button
       name: Generate
-      action: ssh-keygen -b $KEY_LENGTH -f id_rsa.pub -N ''
+      action: ssh-keygen -b $KEY_LENGTH -f id_rsa -N ''
   output:
-    textarea:
+    result:
       name: result
+      tag: textarea
       content:
         - id_rsa
         - id_rsa.pub
 GunPG:
   description: gunpg
   input:
-    select:
+    key-size:
+      tag: select
+      variable: KEY_LENGTH
       name: key size (bits)
       option:
         - 2048
