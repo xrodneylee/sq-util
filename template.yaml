@@ -1,16 +1,14 @@
 SSH:
   description: Generate SSH public and secret keys.
   input:
-    key-size:
+    KEY_LENGTH:
       name: key size (bits)
-      variable: KEY_LENGTH
       tag: select
       option:
         - 2048
         - 4096
-    type:
+    TYPE:
       name: type
-      variable: TYPE
       tag: input
       type: text
     button:
