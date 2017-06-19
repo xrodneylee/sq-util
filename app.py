@@ -41,7 +41,7 @@ def init_html():
       html_str += '<div class="console">\n'
       html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
       html_str += '<fieldset>\n'
-      html_str += '<legend>Input</legend>\n'
+      # html_str += '<legend>Input</legend>\n'
 
       for element in data[service]:
         
@@ -79,7 +79,7 @@ def init_html():
       html_str += '</form>\n'
       html_str += '<form class="pure-form pure-form-aligned">\n'
       html_str += '<fieldset>\n'
-      html_str += '<legend>Output</legend>\n'
+      # html_str += '<legend>Output</legend>\n'
 
       for element in data[service]:
         
