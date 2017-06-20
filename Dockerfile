@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine
 MAINTAINER guanpu.lee "xrodneylee@infinitiessoft.com"
 WORKDIR /usr/src/app
 COPY requirements.txt ./
