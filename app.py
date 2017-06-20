@@ -72,11 +72,6 @@ def init_html():
               for option in data[service][element][field]['option']:
                 html_str += '<input type="radio" name=' + field + ' value="' + str(option) + '"> ' + str(option) +' '
               html_str += '</div>\n'
-            elif data[service][element][field]['type'] == 'checkbox':
-              html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-              html_str += '<input name="' + field + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
-              html_str += '</div>\n'
             else:
               html_str += '<div class="pure-control-group">\n'
               html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
