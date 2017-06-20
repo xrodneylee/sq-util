@@ -7,18 +7,15 @@ SSH:
       option:
         - 2048
         - 4096
-    KEY_LENGTHS:
-      name: key sizes (bits)
-      type: radio
-      option:
-        - 2048
-        - 4096
     TYPE:
       name: type
-      type: text
+      type: radio
+      option:
+        - rsa
+        - dsa
     button:
-      type: button
       name: Generate
+      type: button
       action: ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
     result:
@@ -27,12 +24,3 @@ SSH:
       content:
         - id_rsa
         - id_rsa.pub
-GunPG:
-  description: gunpg
-  input:
-    key-size:
-      type: select
-      name: key size (bits)
-      option:
-        - 2048
-        - 4096
