@@ -26,3 +26,12 @@ SSH:
         - id_rsa
         - id_rsa.pub
 ```
+
+### Setting
+- type
+  - combobox
+  - radio
+  - text
+  - password
+  - textarea
+  - button
