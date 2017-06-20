@@ -53,12 +53,12 @@ def init_html():
 
         elif element == 'input':
           for field in data[service][element]:
-            if data[service][element][field]['tag'] == 'button':
+            if data[service][element][field]['type'] == 'button':
               html_str += '<div class="pure-controls">\n'
               html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
               html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][field]['name'] + '</button>\n'
               html_str += '</div>\n'
-            elif data[service][element][field]['tag'] == 'select':
+            elif data[service][element][field]['type'] == 'combobox':
               html_str += '<div class="pure-control-group">\n'
               html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
               html_str += '<select name="' + field + '" class="pure-input-1-3">\n'
@@ -66,7 +66,18 @@ def init_html():
                 html_str += '<option value="' + str(option) + '">' + str(option) + '</option>\n'
               html_str += '</select>\n'
               html_str += '</div>\n'
-            elif data[service][element][field]['tag'] == 'input':
+            elif data[service][element][field]['type'] == 'radio':
+              html_str += '<div class="pure-control-group">\n'
+              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+              for option in data[service][element][field]['option']:
+                html_str += '<input type="radio" name=' + field + ' value="' + str(option) + '"> ' + str(option) +' '
+              html_str += '</div>\n'
+            elif data[service][element][field]['type'] == 'checkbox':
+              html_str += '<div class="pure-control-group">\n'
+              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+              html_str += '<input name="' + field + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
+              html_str += '</div>\n'
+            else:
               html_str += '<div class="pure-control-group">\n'
               html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
               html_str += '<input name="' + field + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
@@ -85,7 +96,7 @@ def init_html():
         
         if element == 'output':
           for field in data[service][element]:
-            if data[service][element][field]['tag'] == 'textarea':
+            if data[service][element][field]['type'] == 'textarea':
               html_str += '<div class="pure-control-group">\n'
               html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
               html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>\n'

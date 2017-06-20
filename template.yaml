@@ -3,22 +3,27 @@ SSH:
   input:
     KEY_LENGTH:
       name: key size (bits)
-      tag: select
+      type: combobox
+      option:
+        - 2048
+        - 4096
+    KEY_LENGTHS:
+      name: key sizes (bits)
+      type: radio
       option:
         - 2048
         - 4096
     TYPE:
       name: type
-      tag: input
       type: text
     button:
-      tag: button
+      type: button
       name: Generate
       action: ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
     result:
       name: result
-      tag: textarea
+      type: textarea
       content:
         - id_rsa
         - id_rsa.pub
@@ -26,8 +31,7 @@ GunPG:
   description: gunpg
   input:
     key-size:
-      tag: select
-      variable: KEY_LENGTH
+      type: select
       name: key size (bits)
       option:
         - 2048
