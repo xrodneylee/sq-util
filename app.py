@@ -34,77 +34,75 @@ def inject_enumerate():
 @app.before_first_request
 def init_html():
     for service in data:
-      app.logger.info('init html=' + service)
-      html_str = '{% extends "index.html" %}\n'
-      html_str += '{% block content %}\n'
-      html_str += '<h1>' + service + '</h1>\n'
-      html_str += '<div class="console">\n'
-      html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
-      html_str += '<fieldset>\n'
-      # html_str += '<legend>Input</legend>\n'
+        app.logger.info('init html=' + service)
+        html_str = '{% extends "index.html" %}\n'
+        html_str += '{% block content %}\n'
+        html_str += '<h1>' + service + '</h1>\n'
+        html_str += '<div class="console">\n'
+        html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
+        html_str += '<fieldset>\n'
+        # html_str += '<legend>Input</legend>\n'
 
-      for element in data[service]:
-        
-        if element == 'description':
-          html_str += '<div class="pure-control-group">\n'
-          html_str += '<label>' + element + '</label>\n'
-          html_str += '<span>' + data[service][element] + '</span>\n'
-          html_str += '</div>\n'
+        for element in data[service]:
+            if element == 'description':
+                html_str += '<div class="pure-control-group">\n'
+                html_str += '<label>' + element + '</label>\n'
+                html_str += '<span>' + data[service][element] + '</span>\n'
+                html_str += '</div>\n'
 
-        elif element == 'input':
-          for field in data[service][element]:
-            if data[service][element][field]['type'] == 'button':
-              html_str += '<div class="pure-controls">\n'
-              html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
-              html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][field]['name'] + '</button>\n'
-              html_str += '</div>\n'
-            elif data[service][element][field]['type'] == 'combobox':
-              html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-              html_str += '<select name="' + field + '" class="pure-input-1-3">\n'
-              for option in data[service][element][field]['option']:
-                html_str += '<option value="' + str(option) + '">' + str(option) + '</option>\n'
-              html_str += '</select>\n'
-              html_str += '</div>\n'
-            elif data[service][element][field]['type'] == 'radio':
-              html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-              for option in data[service][element][field]['option']:
-                html_str += '<input type="radio" name=' + field + ' value="' + str(option) + '"> ' + str(option) +' '
-              html_str += '</div>\n'
+            elif element == 'input':
+                for field in data[service][element]:
+                    if data[service][element][field]['type'] == 'button':
+                        html_str += '<div class="pure-controls">\n'
+                        html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
+                        html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][field]['name'] + '</button>\n'
+                        html_str += '</div>\n'
+                    elif data[service][element][field]['type'] == 'combobox':
+                        html_str += '<div class="pure-control-group">\n'
+                        html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+                        html_str += '<select name="' + field + '" class="pure-input-1-3">\n'
+                        for option in data[service][element][field]['option']:
+                            html_str += '<option value="' + str(option) + '">' + str(option) + '</option>\n'
+                        html_str += '</select>\n'
+                        html_str += '</div>\n'
+                    elif data[service][element][field]['type'] == 'radio':
+                        html_str += '<div class="pure-control-group">\n'
+                        html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+                        for option in data[service][element][field]['option']:
+                            html_str += '<input type="radio" name=' + field + ' value="' + str(option) + '"> ' + str(option) +' \n'
+                        html_str += '</div>\n'
+                    else:
+                        html_str += '<div class="pure-control-group">\n'
+                        html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+                        html_str += '<input name="' + field + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
+                        html_str += '</div>\n'
+
             else:
-              html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-              html_str += '<input name="' + field + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
-              html_str += '</div>\n'
+                pass
 
-        else:
-          pass
+        html_str += '</fieldset>\n'
+        html_str += '</form>\n'
+        html_str += '<form class="pure-form pure-form-aligned">\n'
+        html_str += '<fieldset>\n'
+        # html_str += '<legend>Output</legend>\n'
 
-      html_str += '</fieldset>\n'
-      html_str += '</form>\n'
-      html_str += '<form class="pure-form pure-form-aligned">\n'
-      html_str += '<fieldset>\n'
-      # html_str += '<legend>Output</legend>\n'
+        for element in data[service]:
+            if element == 'output':
+                for field in data[service][element]:
+                    if data[service][element][field]['type'] == 'textarea':
+                        html_str += '<div class="pure-control-group">\n'
+                        html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+                        html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>\n'
+                        html_str += '</div>\n'
+                    else:
+                        pass
 
-      for element in data[service]:
-        
-        if element == 'output':
-          for field in data[service][element]:
-            if data[service][element][field]['type'] == 'textarea':
-              html_str += '<div class="pure-control-group">\n'
-              html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-              html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>\n'
-              html_str += '</div>\n'
-            else:
-              pass
-
-      html_str += '</fieldset>\n'
-      html_str += '</form>\n'
-      html_str += '</div>\n'
-      html_str += '{% endblock content %}'
-      file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
-      file.write(html_str)
+        html_str += '</fieldset>\n'
+        html_str += '</form>\n'
+        html_str += '</div>\n'
+        html_str += '{% endblock content %}'
+        file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
+        file.write(html_str)
 
     file.close()
 
