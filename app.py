@@ -109,24 +109,24 @@ def init_html():
 @app.route('/')
 @app.route('/<service>')
 @app.route('/<service>', methods=['POST'])
-def index(service=None):
+def index(service = None):
     if request.method == 'POST':
-      action=request.form.get('action')
-      result = ''
-      for key in request.form:
-        if key != 'action':
-          app.logger.info(key + '=' + request.form.get(key))
-          action = str(action).replace('$'+key, request.form.get(key))
-      os.system(action)
-      for file in data[service]['output']['result']['content']:
-        f = open(file, 'r')
-        result += f.read() + '\n\n\n\n\n'
-      f.close()
-      for file in data[service]['output']['result']['content']:
-        os.remove(file)      
-      return render_template(service + '.html', menu=data, result=result)
+        action = request.form.get('action')
+        result = ''
+        for key in request.form:
+            if key != 'action':
+                app.logger.info(key + '=' + request.form.get(key))
+                action = str(action).replace('$'+key, request.form.get(key))
+        os.system(action)
+        for file in data[service]['output']['result']['content']:
+            f = open(file, 'r')
+            result += f.read() + '\n\n\n\n\n'
+        f.close()
+        for file in data[service]['output']['result']['content']:
+            os.remove(file)
+        return render_template(service + '.html', menu=data, result=result)
     elif service:
-      return render_template(service + '.html', menu=data)
+        return render_template(service + '.html', menu=data)
     return render_template('index.html', menu=data)
 
 if __name__ == '__main__':
