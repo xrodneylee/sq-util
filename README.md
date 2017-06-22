@@ -23,7 +23,8 @@ SSH:
     button:
       name: Generate
       type: button
-      action: ssh-keygen -b $KEY_LENGTH -f id_rsa -N ''
+      actions: 
+        - ssh-keygen -b $KEY_LENGTH -f id_rsa -N ''
   output:
     result:
       name: result
