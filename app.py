@@ -41,7 +41,6 @@ def init_html():
         html_str += '<div class="console">\n'
         html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
         html_str += '<fieldset>\n'
-        # html_str += '<legend>Input</legend>\n'
 
         for element in data[service]:
             if element == 'description':
@@ -49,7 +48,6 @@ def init_html():
                 html_str += '<label>' + element + '</label>\n'
                 html_str += '<span>' + data[service][element] + '</span>\n'
                 html_str += '</div>\n'
-
             elif element == 'input':
                 for field in data[service][element]:
                     if data[service][element][field]['type'] == 'button':
@@ -76,18 +74,11 @@ def init_html():
                         html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
                         html_str += '<input name="' + field + '" class="pure-input-1-3" type="' + data[service][element][field]['type'] + '">\n'
                         html_str += '</div>\n'
-
-            else:
-                pass
-
-        html_str += '</fieldset>\n'
-        html_str += '</form>\n'
-        html_str += '<form class="pure-form pure-form-aligned">\n'
-        html_str += '<fieldset>\n'
-        # html_str += '<legend>Output</legend>\n'
-
-        for element in data[service]:
-            if element == 'output':
+                html_str += '</fieldset>\n'
+                html_str += '</form>\n'
+            elif element == 'output':
+                html_str += '<form class="pure-form pure-form-aligned">\n'
+                html_str += '<fieldset>\n'
                 for field in data[service][element]:
                     if data[service][element][field]['type'] == 'textarea':
                         html_str += '<div class="pure-control-group">\n'
@@ -96,11 +87,12 @@ def init_html():
                         html_str += '</div>\n'
                     else:
                         pass
-
-        html_str += '</fieldset>\n'
-        html_str += '</form>\n'
-        html_str += '</div>\n'
-        html_str += '{% endblock content %}'
+                html_str += '</fieldset>\n'
+                html_str += '</form>\n'
+                html_str += '</div>\n'
+                html_str += '{% endblock content %}'
+            else:
+                pass
         file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
         file.write(html_str)
 
