@@ -1,16 +1,26 @@
-ssh:
+SSH:
   description: Generate SSH public and secret keys.
   input:
-    key size (bits):
-      tag: select
+    KEY_LENGTH:
+      name: key size (bits)
+      type: combobox
       option:
         - 2048
         - 4096
+    TYPE:
+      name: type
+      type: radio
+      option:
+        - rsa
+        - dsa
     button:
-      tag: button
-      type: submit
       name: Generate
-      action: ssh-keygen -b $KEY_LENGTH -f id_rsa.pub -N ''  
+      type: button
+      action: ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
     result:
-      tag: textarea
+      name: result
+      type: textarea
+      content:
+        - id_rsa
+        - id_rsa.pub

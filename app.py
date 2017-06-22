@@ -9,7 +9,7 @@ import yaml
 
 app = Flask(__name__)
 TEMPLATES_PATH = 'templates/'
-CONFIG_FILE = 'template.yaml'
+CONFIG_FILE = 'config.yaml'
 
 def ordered_yaml_load(yaml_path, Loader=yaml.Loader,
                     object_pairs_hook=OrderedDict):
