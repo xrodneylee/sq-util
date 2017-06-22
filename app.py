@@ -33,6 +33,7 @@ def inject_enumerate():
 
 @app.before_first_request
 def init_html():
+    """ initialize all html except index.html """
     for service in data:
         app.logger.info('init html=' + service)
         html_str = '{% extends "index.html" %}\n'
