@@ -25,5 +25,3 @@ SSH:
       content:
         - id_rsa
         - id_rsa.pub
-        - id_rsaa
-        - id_rsaa.pub
