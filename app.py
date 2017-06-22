@@ -1,10 +1,10 @@
-from flask import Flask
-from flask import render_template
-from flask import request
 from collections import OrderedDict
 from logging.handlers import RotatingFileHandler
 import logging
 import os
+from flask import Flask
+from flask import render_template
+from flask import request
 import yaml
 
 app = Flask(__name__)
