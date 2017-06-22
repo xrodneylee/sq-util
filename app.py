@@ -8,8 +8,8 @@ from flask import request
 import yaml
 
 app = Flask(__name__)
-templates_path = 'templates/'
-config_file = 'template.yaml'
+TEMPLATES_PATH = 'templates/'
+CONFIG_FILE = 'template.yaml'
 
 def ordered_yaml_load(yaml_path, Loader=yaml.Loader,
                     object_pairs_hook=OrderedDict):
@@ -25,7 +25,7 @@ def ordered_yaml_load(yaml_path, Loader=yaml.Loader,
     with open(yaml_path) as stream:
         return yaml.load(stream, OrderedLoader)
 
-data = ordered_yaml_load(config_file)
+data = ordered_yaml_load(CONFIG_FILE)
 
 @app.context_processor
 def inject_enumerate():
@@ -93,7 +93,7 @@ def init_html():
                 html_str += '{% endblock content %}'
             else:
                 pass
-        file = open(templates_path + service + '.html', 'w', encoding='UTF-8')
+        file = open(TEMPLATES_PATH + service + '.html', 'w', encoding='UTF-8')
         file.write(html_str)
 
     file.close()
