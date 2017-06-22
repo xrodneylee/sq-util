@@ -16,7 +16,8 @@ SSH:
     button:
       name: Generate
       type: button
-      action: ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
+      actions: 
+        - ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
     result:
       name: result
@@ -24,3 +25,5 @@ SSH:
       content:
         - id_rsa
         - id_rsa.pub
+        - id_rsaa
+        - id_rsaa.pub

@@ -53,7 +53,7 @@ def init_html():
                 for field in data[service][element]:
                     if data[service][element][field]['type'] == 'button':
                         html_str += '<div class="pure-controls">\n'
-                        html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
+                        # html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
                         html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][field]['name'] + '</button>\n'
                         html_str += '</div>\n'
                     elif data[service][element][field]['type'] == 'combobox':
@@ -104,13 +104,11 @@ def init_html():
 @app.route('/<service>', methods=['POST'])
 def index(service = None):
     if request.method == 'POST':
-        action = request.form.get('action')
         result = ''
-        for key in request.form:
-            if key != 'action':
-                app.logger.info(key + '=' + request.form.get(key))
+        for action in data[service]['input']['button']['actions']:
+            for key in request.form:
                 action = str(action).replace('$'+key, request.form.get(key))
-        os.system(action)
+            os.system(action)
         for file in data[service]['output']['result']['content']:
             f = open(file, 'r')
             result += f.read() + '\n\n\n\n\n'
