@@ -3,6 +3,12 @@
 
 ## Usage
 
+### Restriction
+- `description` must be setting.
+- `input` must be setting.
+- `output` must be setting.
+- `button` must be setting, and only one button.
+
 ### Sample
 ```
 SSH:
@@ -19,7 +25,7 @@ SSH:
       type: button
       action: ssh-keygen -b $KEY_LENGTH -f id_rsa -N ''
   output:
-    RESULT:
+    result:
       name: result
       type: textarea
       content:
