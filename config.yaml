@@ -9,7 +9,7 @@ SSH:
         - 4096
     TYPE:
       name: type
-      type: radio
+      type: combobox
       option:
         - rsa
         - dsa

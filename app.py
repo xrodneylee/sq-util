@@ -65,6 +65,11 @@ def init_html():
                         for option in data[service][element][field]['option']:
                             html_str += '<input type="radio" name=' + field + ' value="' + str(option) + '"> ' + str(option) +' \n'
                         html_str += '</div>\n'
+                    elif data[service][element][field]['type'] == 'textarea':
+                        html_str += '<div class="pure-control-group">\n'
+                        html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
+                        html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>' + data[service][element][field]['content'] + '</textarea>\n'
+                        html_str += '</div>\n'
                     else:
                         html_str += '<div class="pure-control-group">\n'
                         html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
