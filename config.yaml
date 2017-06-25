@@ -19,9 +19,11 @@ SSH:
       actions: 
         - ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
-    result:
-      name: result
+    PUBLIC_KEY:
+      name: public key
       type: textarea
-      content:
-        - id_rsa
-        - id_rsa.pub
+      content: id_rsa.pub
+    PRIVATE_KEY:
+      name: private key
+      type: textarea
+      content: id_rsa

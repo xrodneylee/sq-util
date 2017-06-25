@@ -79,7 +79,7 @@ def init_html():
                     if data[service][element][field]['type'] == 'textarea':
                         html_str += '<div class="pure-control-group">\n'
                         html_str += '<label>' + data[service][element][field]['name'] + '</label>\n'
-                        html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{result}}</textarea>\n'
+                        html_str += '<textarea class="pure-input-1-2" style="height: 150px" readonly>{{' + field + '}}</textarea>\n'
                         html_str += '</div>\n'
                     else:
                         pass
@@ -98,22 +98,22 @@ def init_html():
 @app.route('/<service>')
 @app.route('/<service>', methods=['POST'])
 def index(service = None):
+    result = {'menu' : data}
     if request.method == 'POST':
-        result = ''
         for action in data[service]['input']['button']['actions']:
             for key in request.form:
                 action = str(action).replace('$'+key, request.form.get(key))
             os.system(action)
-        for file in data[service]['output']['result']['content']:
-            f = open(file, 'r')
-            result += f.read() + '\n\n\n\n\n'
+        for field in data[service]['output']:
+            f = open(data[service]['output'][field]['content'], 'r')
+            result[field] = f.read()
         f.close()
-        for file in data[service]['output']['result']['content']:
-            os.remove(file)
-        return render_template(service + '.html', menu=data, result=result)
+        for field in data[service]['output']:
+            os.remove(data[service]['output'][field]['content'])
+        return render_template(service + '.html', **result)
     elif service:
-        return render_template(service + '.html', menu=data)
-    return render_template('index.html', menu=data)
+        return render_template(service + '.html', **result)
+    return render_template('index.html', **result)
 
 if __name__ == '__main__':
     handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)

@@ -6,8 +6,8 @@
 ### Restriction
 - `description` must be setting.
 - `input` must be setting.
+  - `button` must be setting, and only one button.
 - `output` must be setting.
-- `button` must be setting, and only one button.
 
 ### Sample
 ```
@@ -20,18 +20,26 @@ SSH:
       option:
         - 2048
         - 4096
+    TYPE:
+      name: type
+      type: radio
+      option:
+        - rsa
+        - dsa
     button:
       name: Generate
       type: button
       actions: 
-        - ssh-keygen -b $KEY_LENGTH -f id_rsa -N ''
+        - ssh-keygen -b $KEY_LENGTH -t $TYPE -f id_rsa -N ''
   output:
-    result:
-      name: result
+    PUBLIC_KEY:
+      name: public key
       type: textarea
-      content:
-        - id_rsa
-        - id_rsa.pub
+      content: id_rsa.pub
+    PRIVATE_KEY:
+      name: private key
+      type: textarea
+      content: id_rsa
 ```
 
 ### Setting
