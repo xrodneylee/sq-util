@@ -43,9 +43,14 @@ table {
 	border-spacing: 0;
 }
 
-html, body, .wrap, .menu, .main {
+html, .wrap, .menu, .main {
 	height: 100%;
 	font-family: Franklin Gothic;
+}
+
+body{
+	position: relative;
+  	min-height: 100%;
 }
 
 h1 {
@@ -69,10 +74,6 @@ th {
 
 tr:nth-child(odd) {
 	background-color: #f2f2f2
-}
-
-.wrap {
-	margin: 0 auto 0 auto;
 }
 
 .menu {
@@ -116,6 +117,7 @@ tr:nth-child(odd) {
 	text-align: center;
 	font-size: .5em;
 	height: 1.5em;
+	width: 100%;
 	bottom: 0;
-	position: relative;
+	position: absolute;
 }
