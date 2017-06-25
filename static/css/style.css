@@ -52,6 +52,10 @@ h1 {
 	padding: .5em;
 }
 
+h2 {
+	padding: .5em;
+}
+
 table, th, td {
     text-align: left;
     padding: .5em;

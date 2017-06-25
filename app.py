@@ -39,21 +39,16 @@ def init_html():
         html_str = '{% extends "index.html" %}\n'
         html_str += '{% block content %}\n'
         html_str += '<h1>' + service + '</h1>\n'
+        html_str += '<h2>' + data[service]['description'] + '</h2>\n'
         html_str += '<div class="console">\n'
         html_str += '<form class="pure-form pure-form-aligned" action="/' + service + '" method="post">\n'
         html_str += '<fieldset>\n'
 
         for element in data[service]:
-            if element == 'description':
-                html_str += '<div class="pure-control-group">\n'
-                html_str += '<label>' + element + '</label>\n'
-                html_str += '<span>' + data[service][element] + '</span>\n'
-                html_str += '</div>\n'
-            elif element == 'input':
+            if element == 'input':
                 for field in data[service][element]:
                     if data[service][element][field]['type'] == 'button':
                         html_str += '<div class="pure-controls">\n'
-                        # html_str += '<input name="action" class="pure-input-1-3" value="' + data[service][element][field]['action'] + '" hidden>\n'
                         html_str += '<button type="submit" class="pure-button pure-button-primary">' + data[service][element][field]['name'] + '</button>\n'
                         html_str += '</div>\n'
                     elif data[service][element][field]['type'] == 'combobox':
