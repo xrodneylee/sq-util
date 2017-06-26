@@ -27,3 +27,21 @@ SSH:
       name: private key
       type: textarea
       content: id_rsa
+APG:
+  description: Automated Password Generator
+  input:
+    MIN_PASS_LEN:
+      name: minimum password length
+      type: number
+      min: 8
+      max: 20
+    button:
+      name: Generate
+      type: button
+      actions:
+        - apg -M SNCL -m $MIN_PASS_LEN > temp
+  output:
+    LIST:
+      name: random password
+      type: textarea
+      content: temp
