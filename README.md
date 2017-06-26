@@ -10,7 +10,7 @@
 - `output` must be setting.
 
 ### Sample
-```
+```yaml
 SSH:
   description: Generate SSH public and secret keys.
   input:
