@@ -31,8 +31,7 @@ data = ordered_yaml_load(CONFIG_FILE)
 def inject_enumerate():
     return dict(enumerate=enumerate)
 
-@app.before_first_request
-def init_html():
+def _init_html():
     """ initialize all html except index.html """
     for service in data:
         app.logger.info('init html=' + service)
@@ -121,6 +120,7 @@ def index(service = None):
     return render_template('index.html', **result)
 
 if __name__ == '__main__':
+    _init_html()
     handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
