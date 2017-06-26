@@ -49,4 +49,6 @@ SSH:
   - text
   - password
   - textarea
+  - number
+  - email
   - button
